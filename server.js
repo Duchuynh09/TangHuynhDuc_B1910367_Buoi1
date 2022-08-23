@@ -17,18 +17,18 @@ fs.readFile('data.txt', 'utf8', (err, data) => {
     return;
   }
   
-  console.log(data.length);
-  var count=0;
-  var start=0;
-  var space=0;
-  for(let i=0;i<data.length;i++){
-    if(data.charAt(i))
-      start=i+18;
-      console.log(data.charAt(i));
+  // console.log(data.length);
+  // var count=0;
+  // var start=0;
+  // var space=0;
+  // for(let i=0;i<data.length;i++){
+  //   if(data.charAt(i))
+  //     start=i+18;
+  //     console.log(data.charAt(i));
   
     // count++;
     // console.log(i)
-  }
+  // }
   // console.log(count);
   
 });
