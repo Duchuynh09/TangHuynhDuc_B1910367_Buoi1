@@ -53,7 +53,7 @@ class ContactService{
         }
     async create(payload) {
             const contact = this.extractConactData(payload);
-            const result = await this.Contact.findOneAndUpdate(
+            const result = await this.contact.findOneAndUpdate(
             contact,
             { $set: { favorite: contact.favorite === true } },
             { returnDocument: "after", upsert: true }

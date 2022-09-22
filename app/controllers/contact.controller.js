@@ -1,12 +1,15 @@
 const ApiError = require("../api-error");
 const ContactService = require("../services/contact.service");
 const MongoDB = require("../utils/mongodb.util");
-
-exports.create = (ref,res) => {
-    res.send({ message: "create handler"});
-};
-
-exports.findAll = async (ref,res,next) => {
+// const ContactModel = require("../models/contactModel.js")
+exports.findAll = async (req,res,next) => {
+    // const contact = new ContactModel({
+    //     email:'adsadsadsa',
+    //     phone:'dsadasdasd',
+    //     address:'dafasfa',
+    //     name:'dasdasdsad'
+    // })
+    // contact.save()
     let documents= [];
     try {
         const contactService = new ContactService(MongoDB.client);
@@ -19,7 +22,7 @@ exports.findAll = async (ref,res,next) => {
             new ApiError(500,"An error occurred while retrieving contacts")
         );
     }
-    return res.send( documents);
+    // return res.status(200).json({contact});
 };
 
 exports.findOne = async(req,res) => {
@@ -65,7 +68,7 @@ exports.deleteAll = async(_req,res,next) => {
     }
 };
 
-exports.findAllFavorite = (_req,res,next) => {
+exports.findAllFavorite = async(_req,res,next) => {
     try {
         const contactService = new ContactService(MongoDB.client);
         const documents = await contactService.findFavorite();
@@ -75,9 +78,10 @@ exports.findAllFavorite = (_req,res,next) => {
     }
 };
 
-exports.create = async (req,res,next) =>{
-    if(!req.body?.name){
-        return next(new Apierro(400,"Name can not be empty"));
+exports.create = async (_req,res,next) =>{
+    console.log(_req.body)
+    if(!_req.body?.name){
+        return next(new ApiError(400,"Name can not be empty"));
     }
     try {
         const contactService = new contactService(MongoDB.client);
@@ -86,8 +90,9 @@ exports.create = async (req,res,next) =>{
         
     } catch (error) {
         return next(
-            new ApiErro(500, "An error occurred while creating the contact")
+            new ApiError(500, "An error occurred while creating the contact")
         );
     }
 }
+
  
